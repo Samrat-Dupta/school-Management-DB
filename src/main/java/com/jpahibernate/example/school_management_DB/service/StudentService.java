@@ -22,4 +22,10 @@ public class StudentService {
         studentRepository.saveAll(studentList);
         return "Student saved successfully";
     }
+
+    public List<Student> getAllStudents(){
+        List<Student> studentList = studentRepository.findAll();
+        return studentList;
+    }
+
 }

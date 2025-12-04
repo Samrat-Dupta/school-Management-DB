@@ -26,4 +26,9 @@ public class StudentController {
         String response = studentService.saveStudents(studentList);
         return response;
     }
+    @GetMapping("/findAll")
+    public List<Student> findAllStudent(){
+        List<Student> studentList  = studentService.getAllStudents();
+        return studentList;
+    }
 }
