@@ -31,4 +31,30 @@ public class StudentController {
         List<Student> studentList  = studentService.getAllStudents();
         return studentList;
     }
+
+    @GetMapping("/find/{studentid}")
+    public Student findStudentById(@PathVariable("studentid") int studentId){
+        Student student = studentService.getStudentById(studentId);
+        return student;
+    }
+    @DeleteMapping("/delete/{studentid}")
+    public String deleteStudentById(@PathVariable("studentid") int studentId){
+        String response = studentService.deleteStudentById(studentId);
+        return response;
+    }
+
+    //PUT - we update whole field(like whole object)
+    //PATCH we update specific field only
+
+    @PutMapping("/updatePut/{studentid}")
+    public String updateStudentByIdPut(@PathVariable("studentid") int studentId, @RequestBody Student student){
+        String response = studentService.updateStudentWithPut(studentId, student);
+        return response;
+    }
+
+    @PatchMapping("/updatePatch/{studentid}")
+    public String updateStudentByPatch(@PathVariable("studentid") int studentId, @RequestParam("grade") String grade, @RequestParam("dob") String dob){
+        String response = studentService.updateStudentWithPatch(studentId, grade, dob);
+        return response;
+    }
 }

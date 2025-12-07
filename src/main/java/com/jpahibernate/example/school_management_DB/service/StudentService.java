@@ -28,4 +28,40 @@ public class StudentService {
         return studentList;
     }
 
+    public Student getStudentById(int studentId){
+        Student student = studentRepository.findById(studentId).get();
+        return student;
+    }
+
+    public String deleteStudentById(int studentId){
+        studentRepository.deleteById(studentId);
+        return "student with id : " +studentId+ " got deleted";
+    }
+
+    public String updateStudentWithPut(int studentId, Student newStudentRequest){
+        //first find the studentId
+        //if student present update it
+        //else no need to update
+        Student student = getStudentById(studentId);
+        if(student!=null){
+            studentRepository.save(newStudentRequest);
+            return "Student updated successfully";
+        } else {
+            return "cannot find student with Id : "+studentId;
+        }
+    }
+
+    public String updateStudentWithPatch(int studentId, String grade, String dob){
+
+        Student student = getStudentById(studentId);
+        if(student!=null){
+            student.setGrade(grade);
+            student.setDob(dob);
+            studentRepository.save(student);
+            return "Student updated successfully";
+        } else {
+            return "cannot find student with Id : "+studentId;
+        }
+    }
+
 }
